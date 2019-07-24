@@ -1,0 +1,72 @@
+@charset "utf-8";
+
+/*
+    1.栅栏系统
+*/ 
+
+$columns: 24;//份数
+$row-gutter: 30px;//每个row之间的距离
+$flex-type: (
+    around: space-around,
+    between: space-between,
+    center: center,
+    left: flex-start,
+    right: flex-end,
+);
+
+
+.container {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    padding-left: $row-gutter/2;
+    padding-right: $row-gutter/2;
+}
+
+.row {
+    display: flex;
+    margin-left: -($row-gutter/2);
+    margin-right: -($row-gutter/2);
+    height: 100%;
+    &.center {
+        align-items: center;//默认垂直居中
+    }
+    &.column {
+        flex-direction: column;//默认垂直居中
+    }
+}
+
+@each $key,$value in $flex-type {
+    .row-#{$key} {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: $value;
+        height: 100%;
+        margin-left: -($row-gutter/2);
+        margin-right: -($row-gutter/2);
+        &.center {
+            align-items: center;//默认垂直居中
+        }
+        &.column {
+            flex-direction: column;//默认垂直居中
+        }
+    }
+}
+
+
+
+@for $i from 1 through $columns {
+    .col-#{$i} {
+        flex: 0 0 auto;
+        width: percentage($i/$columns) !important; 
+        height: 100%;
+        min-height: 1px; 
+        padding-left: $row-gutter/2;
+        padding-right: $row-gutter/2;
+    }
+    .offset-#{$i} {
+        margin-left: percentage($i/$columns);
+    }
+}
+
+

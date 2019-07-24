@@ -1,0 +1,123 @@
+@charset "utf-8";
+//=====================================清除一些常见的样式====================================//
+* {
+    box-sizing: border-box;
+}
+html {
+    font-size: 14px;
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
+}
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    color: $gray-700;
+}
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+}
+button,
+input,
+textarea {
+    outline: none;
+    padding: 0;
+}
+.icon {
+    width: 1.3em;
+    height: 1.3em;
+    vertical-align: -0.4em;
+    fill: currentColor;
+    overflow: hidden;
+}
+
+h2 {
+    margin: 0;
+}
+
+.close {
+    cursor: pointer;
+    position: absolute;
+    line-height: 1.5;
+    top: 50%;
+    transform: translate(0, -50%);
+    right: 1rem;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+        background: #ccc;
+    }
+}
+
+pre {
+    margin: 0;
+    padding: .5rem .75rem;
+    border: 1px solid #d1d5da;
+    border-radius: .4rem;
+    background-color: #f0f0f0;
+    white-space: pre-wrap;
+    display: block;
+    font-size: 87.5%;
+    color: #212529;
+    font-family: SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;
+}
+.svg-icon {
+    width: 1em; height: 1em;
+    vertical-align: -0.15em;
+    margin-right: .6em;
+    fill: currentColor;
+    overflow: hidden;
+}
+
+//=====================================部分全局变量====================================//
+.search-item-wrap {
+    position:absolute;
+    right: 1em;
+    top: 10px;
+    @media(max-width: 992px) {
+        width: 100%;
+        top: auto;
+        bottom: 0;
+    }
+}
+
+
+
+//=====================================常见动画====================================//
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+        transform: translate3D(0, -20px, 0);
+    }
+    100% {
+        transform: translate3D(0, 0, 0);
+        opacity: 1;
+    }
+}
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+        transform: translate3D(0, 0, 0);
+    }
+    100% {
+        opacity: 0;
+        transform: translate3D(0, -20px, 0);
+    }
+}
+.fade-enter-active {
+    animation: fade-in .3s;
+}
+.fade-leave-active {
+    animation: fade-out .3s;
+}

@@ -1,0 +1,171 @@
+@charset "utf-8";
+//=========================================================================//
+//=============================颜色定义=====================================//
+//=========================================================================//
+
+
+//=====================================白色到黑色的渐变定义====================================//
+$white: #fff;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #6c757d !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+$black:    #000 !default;
+
+$grays: () !default;
+$gray: map-merge(
+    (
+        "100": $gray-100,
+        "200": $gray-200,
+        "300": $gray-300,
+        "400": $gray-400,
+        "500": $gray-500,
+        "600": $gray-600,
+        "700": $gray-700,
+        "800": $gray-800,
+        "900": $gray-900
+    ),
+    $grays
+);
+
+
+//===================================常见颜色定义======================================//
+$blue:    #409EFF !default;
+$red:     #F56C6C !default;
+$orange:  #fd7e14 !default;
+$yellow:  #ffc107 !default;
+$green:   #28a745 !default;
+$purple:  #6f42c1 !default;
+$indigo:  #6610f2 !default;//靛蓝色
+$pink:    #f9a2c4 !default;
+$teal:    #20c997 !default;//青色
+$cyan:    #17a2b8 !default;//蓝绿色
+
+$theme-color:   #409EFF !default;//主题色定义
+
+
+$colors: () !default;
+$colors: map-merge(
+    (
+        "blue":       $blue,
+        "indigo":     $indigo,
+        "purple":     $purple,
+        "pink":       $pink,
+        "red":        $red,
+        "orange":     $orange,
+        "yellow":     $yellow,
+        "green":      $green,
+        "teal":       $teal,
+        "cyan":       $cyan,
+        "black":      $black,
+        "white":      $white,
+        "theme-color": $theme-color
+    ),
+    $colors
+);
+
+
+//=====================================提示色，主题色====================================//
+$primary:       $blue !default;//主要的
+$secondary:     $gray-600 !default;//次要的颜色
+$success:       $green !default;//成功绿
+$info:          $cyan !default;//信息蓝
+$warning:       $yellow !default;//警告黄
+$danger:        $red !default;//危险红
+$light:         $gray-100 !default;//明亮
+$dark:          $gray-800 !default;//暗淡
+
+
+$theme-colors: () !default;
+$theme-colors: map-merge(
+    (
+        "primary":    $primary,
+        "secondary":  $secondary,
+        "success":    $success,
+        "info":       $info,
+        "warning":    $warning,
+        "danger":     $danger,
+        "light":      $light,
+        "dark":       $dark
+    ),
+    $theme-colors
+);
+//=====================================特殊颜色====================================//
+$body-bg:             #f8f9fa;//背景色
+
+
+
+
+
+
+
+
+//=========================================================================//
+//=============================z-index=====================================//
+//=========================================================================//
+
+
+//常见z-index的值
+$zindex-model:                      3333 !default;//模态框
+$zindex-shadow:                     3334 !default;//模态框
+$zindex-tools:                      3335 !default;//模态框
+$zindex-banner:                     3336 !default;//模态框
+$zindex-tabs:                       3336 !default;//模态框
+$zindex-full-screen:                3337 !default;//模态框
+
+
+
+//=========================================================================//
+//=============================公共样式变量=================================//
+//=========================================================================//
+
+
+
+
+
+//圆角
+$border-radius-sm:               3px !default;
+$border-radius:                  6px !default;
+$border-radius-lg:               9px !default;
+
+
+
+
+
+
+
+//============================box-shadow==============================================//
+$box-shadow-sm:               0 2px 5px rgba(0, 0, 0, .12), !default;
+$box-shadow:                  0 2px 7px 0 rgba(0,0,0,.1), !default;
+$box-shadow-lg:               0 2px 12px rgba(0, 0, 0, .3), !default;
+
+//============================================文字=========================================//
+
+$font-weight-base: 400 !default;
+$font-weight-light: 300 !default;
+$font-weight-bold: 700 !default;
+
+//==========================================字体大小============================================//
+
+$font-size-base: 1rem !default;//默认浏览器字体为16px，全局设置会改变默认字体大小
+$font-size-sm: ($font-size-base * .875) !default;
+$font-size-xs: ($font-size-base * .75) !default;
+$font-size-bg: ($font-size-base * 1.125) !default;
+$font-size-lg: ($font-size-base * 1.35) !default;
+$font-size-ex: ($font-size-base * 2) !default;
+
+//==============================border-radius=================//
+
+$border-radius: (
+    "radius-sm": 2px,
+    "radius-xs": 3px,
+    "radius-md": 4px,
+    "radius-bg": 5px,
+    "radius-lg": 6px,
+    "radius-round": 50%
+);

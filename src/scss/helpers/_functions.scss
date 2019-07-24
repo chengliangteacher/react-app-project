@@ -1,0 +1,10 @@
+@charset "utf-8";
+
+
+@function perc($px, $width) {
+    @return percentage($px / $width)
+};
+
+@function rem($px) {
+    @return (($px * 20) / 1920) + rem; 
+}

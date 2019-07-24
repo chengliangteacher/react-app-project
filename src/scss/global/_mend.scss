@@ -1,0 +1,48 @@
+@charset "utf-8";
+.s-card .el-tabs__nav-wrap {
+    display: flex;
+    // justify-content: center;
+}
+.el-input--mini .el-input__inner {
+    height: 28px !important; //fix size="mini"高度改变
+}
+.el-form-item__label {
+    // font-size: 15px !important;
+}
+.el-form-item{
+    margin-bottom: 13px !important;
+}
+.el-form-item__content {
+    height: 41px!important;
+    line-height: 1.3;
+    display: flex;
+    align-items: center;
+}
+.el-pagination {
+    // padding-bottom: 13px;
+}
+// .el-dialog__wrapper{
+//     display: flex;
+//     align-items: center;
+// }
+// .el-dialog{
+//     margin-top: 0 !important;
+// }
+
+//展示页面，输入框之间间隙变短
+.is-view {
+    .el-form-item {
+        margin-bottom: 0px !important;
+    }
+    .el-form-item__content {
+        height: 30px!important;
+        line-height: 30px!important;
+    }
+    .el-form-item__label {
+        line-height: 30px!important;
+    }
+}
+//
+#app .el-divider__text {
+    color: $cyan;
+}

@@ -343,6 +343,9 @@ $fonts2: (
   &.align-between {
     align-items: space-between;
   }
+  &.flex-g1 {
+    flex-grow: 1;
+  }
 }
 .d-inline-flex {
   display: inline-flex;

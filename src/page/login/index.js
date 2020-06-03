@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Form, Icon, Input, Button, Checkbox, Divider, Card } from 'antd';
+import { Form, Input, Button, Card } from 'antd';
 import axios from "axios"
 import md5 from "js-md5"
 export default class Login extends Component {
@@ -32,7 +32,7 @@ export default class Login extends Component {
         sessionStorage.removeItem("_select_app_p1");
         sessionStorage.setItem("code", temp.toString());
         this.setState({
-            validateUrl: "/inspection/gifCode?d=" + temp
+            validateUrl: "http://sz.xrdev.cn/inspection/gifCode?d=" + temp
         })
     }
     render() {
@@ -96,7 +96,7 @@ export default class Login extends Component {
                                             }
                                         }
                                     />
-                                    <img src={this.state.validateUrl} />
+                                    <img src={this.state.validateUrl} onClick={() => { this.getValidate(); }} />
                                 </div>
                             </Form.Item>
                             <div>

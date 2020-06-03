@@ -1,29 +1,51 @@
 import React, { Component } from "react"
 import { Menu } from 'antd';
+import {
+    MailOutlined  } from '@ant-design/icons';
 import routes from "../../router"
 const { SubMenu } = Menu;
 
-export default class MenuApp extends Component {
+export default class MenuApp extends Component { 
+    constructor() {
+        super();
+        this.state = {
+            tree: [],
+            openKeys: [(routes[0].parentId+'')]
+        }
+    }
+
     componentDidMount() {
+        this.setState({
+            tree: JSON.parse(localStorage.tree).children,
+        })
     }
     componentDidCatch(error) {
         console.log(error)
+    }
+    onOpenChange= (openKeys) => {
+        openKeys.forEach(item => {
+            if (item !== this.state.openKeys[0]) {
+                this.setState({
+                    openKeys: [item]
+                })
+            }
+        })
     }
     //=====================================递归无限极菜单====================================//
     MenuApp = (routeArr) => {
         return (
             routeArr.map(item => {
-                if (!item.haschidren) {
+                if (!item.hasChildren) {
                     return (
-                        <Menu.Item key={item.path} onClick={() => { this.props.history.push(item.path) }}>
-                            <span>{item.name}</span>
+                        <Menu.Item icon={<MailOutlined />} key={item.id} onClick={() => { this.props.history.push(item.url) }}>
+                            { item.text }
                         </Menu.Item>
                     )
                 } else {
                     return (
-                        <SubMenu key={item.path} title={item.name}>
+                        <SubMenu key={item.id} title={item.text} icon={<MailOutlined />}>
                             {
-                                this.MenuApp(item.chidren)
+                                this.MenuApp(item.children)
                             }
                         </SubMenu>
                     )
@@ -33,11 +55,13 @@ export default class MenuApp extends Component {
     }
     render() {
         return (
-            <Menu mode="inline" style={{ width: "200px" }} className="menu">
-                {
-                    this.MenuApp(routes)
-                }
-            </Menu>
+            <div style={{ width: this.props.width }}>
+                <Menu openKeys={this.state.openKeys} onOpenChange={this.onOpenChange} mode="inline" className="menu" inlineCollapsed={this.props.collapsed} theme="dark">
+                    {
+                        this.MenuApp(this.state.tree)
+                    }
+                </Menu>
+            </div>
         )
     }
 }

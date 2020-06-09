@@ -3,7 +3,9 @@ import { Route, Redirect, Switch } from "react-router-dom";
 import MenuApp from "./menu"
 import routes from "../router"
 import { Button } from "antd"
+import BreadCrumb from "./BreadCrumb"
 import "./menu/index.scss"
+import AddProgram from "../page/Programmanage/com/addProgram"
 
 import {
   MenuUnfoldOutlined,
@@ -38,17 +40,22 @@ export default class Layoutview extends React.Component {
         </div>
         <div className="d-flex">
           <MenuApp history={this.props.history} width={this.state.width} collapsed={this.state.collapsed} />
-          <div className="ml-1 content" style={{ flexGrow:1 }}>
-            <Switch>
-              {routes.map(item => {
-                return (
-                  <Route key={item.id} path={item.url} component={item.component}>
-                  </Route>
-                )
-              })}
-              <Redirect exact from="/" to={routes[0].path} />
-              <Redirect to='/404' />
-            </Switch>
+          <div style={{ flexGrow:1 }}>
+            <BreadCrumb history={this.props.history} />
+            <div className="ml-1 content">
+              <Switch>
+                {routes.map(item => {
+                  return (
+                    <Route history={this.props.history} key={item.id} path={item.url} component={item.component}>
+                    </Route>
+                  )
+                })}
+                <Route history={this.props.history} path="/app/addProgram" component={AddProgram}>
+                </Route>
+                <Redirect exact from="/" to={routes[0].url} />
+                <Redirect to='/404' />
+              </Switch>
+            </div>
           </div>
         </div>
       </div>

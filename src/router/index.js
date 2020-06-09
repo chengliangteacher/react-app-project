@@ -1,6 +1,4 @@
-import {
-    TestA
-} from '../page' //导入页面
+import * as components from '../page' //导入页面
 //通过组件配置路由
 const tree = JSON.parse(localStorage.tree).children;
 const routes = [];
@@ -9,9 +7,28 @@ let dealRoutes =  function(data) {
         if (item.hasChildren) {
             dealRoutes(item.children);
         } else {
-            routes.push({ ...item, path: item.url, component: TestA })
+            routes.push({ ...item, path: item.url, component: components.TestA })
         }
     })
 }
 dealRoutes(tree);
-export default routes 
+routes.forEach(item => {
+    const url = item.url;
+    if(url) {
+        if (url.split('/').length > 3) {
+            item.component = components.TestB;
+        } else if (url.split('/').length === 3){
+            if (url.split('/')[2].split('-').length>1) {
+                item.component = components.TestB;
+            } else {
+                item.component = url.split('/')[2];
+                item.component = item.component.substring(0, 1).toUpperCase() + item.component.substring(1);
+                item.componentname = item.component.substring(0, 1).toUpperCase() + item.component.substring(1);
+                item.component = components[item.componentname]
+            }
+        }
+    } else {
+        item.component = components.TestA;
+    }
+})
+export default routes

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Table } from "antd"
-import axios from "axios"
+import axios from "../../api"
 class TestA extends Component {
     constructor() {
         super();
@@ -67,9 +67,9 @@ class TestA extends Component {
         }
     }
     componentWillMount() {
-        axios.get("http://sz.xrdev.cn/inspection/planTasks?state=2").then(res => {
+        axios.get("http://sz.xrdev.cn/inspection/planTasks?state=2&&pageNum=1&&pageSize=20").then(res => {
             this.setState({
-                data: res.data.data.map((item, index) => Object.assign(item, { key: item.id, num: index+1 }))
+                data: res.data.map((item, index) => Object.assign(item, { key: item.id, num: index+1 }))
             })
         })
     }

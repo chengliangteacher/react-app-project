@@ -96,7 +96,7 @@ export default class Login extends Component {
                                             }
                                         }
                                     />
-                                    <img src={this.state.validateUrl} onClick={() => { this.getValidate(); }} />
+                                    {/* <img src={this.state.validateUrl} onClick={() => { this.getValidate(); }} /> */}
                                 </div>
                             </Form.Item>
                             <div>

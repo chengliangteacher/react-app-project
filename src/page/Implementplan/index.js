@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import { Skeleton } from "antd"
 class Implementplan extends Component {
     render() {
         return (
-            <div>Implementplan</div>
+            <div>
+                <Skeleton active avatar paragraph={{ rows: 20 }} size="large" />
+            </div>
         )
     }
 }

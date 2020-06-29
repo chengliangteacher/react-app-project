@@ -14,3 +14,9 @@ code {
   background: white;
   height: 60px;
 }
+.login{
+  background-image: url("http://sz.xrdev.cn/static/img/background.584019b.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}

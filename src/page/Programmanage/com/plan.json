@@ -1,0 +1,29 @@
+{
+  "amount": 1,
+  "feeTemplateId": 12,
+  "year": "2020",
+  "endDate": "2020-06-09 00:00:00",
+  "sampleCompanyId": 2,
+  "planClassify": 2,
+  "specialWay": 1,
+  "ruleId": 9,
+  "name": "22222",
+  "foodTypeId": 1,
+  "areaId": 3,
+  "areaIds": "4,5,6,7,8,9,10,11,12,13,123888",
+  "detectionCompanyId": 2,
+  "taskSourceId": 73,
+  "areaNames": "福田区,罗湖区,盐田区,南山区,宝安区,龙岗区,龙华区,坪山区,光明区,大鹏新区,深汕特别合作区",
+  "taskSource": "深圳市市场监督管理局光明监管局食品安全监管科",
+  "sampleCompanyName": "深圳市计量质量检测研究院",
+  "detectionCompanyName": "深圳市计量质量检测研究院",
+  "foodTypeName": "普通食品",
+  "planTypeName": "监督抽检",
+  "planTypeId": 1,
+  "planSmallTypeId": 4,
+  "planSmallTypeName": "日常生产监督(SC)",
+  "planSmallTypeCode": "SC"
+}
+
+http://sz.xrdev.cn/static/img/background.584019b.jpg
+// http://sz.xrdev.cn/inspection/plan/getFeeTemplates?sampleCompanyId=2&detectionCompanyId=2&taskSourceId=119&planSmallTypeId=4

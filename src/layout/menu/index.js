@@ -1,11 +1,11 @@
 import React, { Component } from "react"
 import { Menu } from 'antd';
 import {
-    MailOutlined  } from '@ant-design/icons';
+    AppstoreOutlined  } from '@ant-design/icons';
 import routes from "../../router"
 import { Link } from "react-router-dom";
+import tree from "../../page/login/tree.json"
 const { SubMenu } = Menu;
-
 export default class MenuApp extends Component { 
     constructor() {
         super();
@@ -19,13 +19,13 @@ export default class MenuApp extends Component {
     componentDidMount() {
         if (routes.some(item => item.url === this.props.history.location.pathname)) {
             this.setState({
-                tree: JSON.parse(localStorage.tree).children,
+                tree: tree.children,
                 selectedKeys: [routes.filter(item => item.url === this.props.history.location.pathname)[0].id+''],
                 openKeys: [routes.filter(item => item.url === this.props.history.location.pathname)[0].parentId+""]
             })
         } else {
             this.setState({
-                tree: JSON.parse(localStorage.tree).children,
+                tree: tree.children,
             })
         }
     }
@@ -58,20 +58,20 @@ export default class MenuApp extends Component {
                 if (!item.hasChildren) {
                     if (item.url) {
                         return (
-                            <Menu.Item icon={<MailOutlined />} key={item.id}>
+                            <Menu.Item icon={item.icon ? <AppstoreOutlined /> : ""} key={item.id}>
                                 <Link to={item.url}>{ item.text }</Link>
                             </Menu.Item>
                         )
                     } else {
                         return (
-                            <Menu.Item icon={<MailOutlined />} key={item.id}>
+                            <Menu.Item icon={item.icon ? <AppstoreOutlined /> : ""} key={item.id}>
                                 { item.text }
                             </Menu.Item>
                         )
                     }
                 } else {
                     return (
-                        <SubMenu key={item.id} title={item.text} icon={<MailOutlined />}>
+                        <SubMenu key={item.id} title={item.text} icon={item.icon ? <AppstoreOutlined /> : ""}>
                             {
                                 this.MenuApp(item.children)
                             }

@@ -183,6 +183,10 @@ const Ruleinfo = Loadable({
     loader: () => import('./Ruleinfo'),
     loading: Loading,
 });
+const Department = Loadable({
+    loader: () => import('./Department'),
+    loading: Loading,
+});
 export {
     TestA, TestB,
     ReferralProgram, Programmanage, Implementplan, TaskIssuedmanage, Sampling, Dimensionality,
@@ -191,5 +195,5 @@ export {
     PublicAudit, PublicDownLoad, ExaminationFrontPage, Target, CountAllGet, CheckReason, LoadingTasks,
     SampleDistribution, InspectedUnitmanage, Productsmanage, UnitMaintenance, Foodtypesmanage,
     Testprogramsmanage, Judgestandards, Detectionstandards, Totalwarehouses, Usermanage, Rolemanage,
-    Organizationmanage, Companymanage, Resourcemanage, Logmanage, Addrule, Ruleinfo
+    Organizationmanage, Companymanage, Resourcemanage, Logmanage, Addrule, Ruleinfo,Department
 }

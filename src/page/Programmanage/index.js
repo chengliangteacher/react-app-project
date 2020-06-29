@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Card, Form, Input, Cascader,Select,Button,Tabs,Table } from "antd"
+import { Card, Form, Input, Cascader,Select,Button,Tabs,Table, Modal } from "antd"
 import axios from "../../api"
+import { connect } from "react-redux"
 const { Option } = Select;
 const { TabPane } = Tabs;
 class Programmanage extends Component {
@@ -9,8 +10,8 @@ class Programmanage extends Component {
         this.state = {
             loading: false,
             planTypeData: [],
-            foodTypeData: JSON.parse(localStorage.foodTypesData),
             data: [],
+            btnLoading: false,
             columns: [
                 {
                     title: "#",
@@ -60,7 +61,18 @@ class Programmanage extends Component {
                 },
                 {
                     align: 'center',
-                    title: "操作"
+                    title: "操作",
+                    render: (val) => {
+                        if (this.state.state === "5") {
+                            return (
+                                <div>
+                                    <Button loading={this.state.btnLoading} type="link" onClick={() => { this.handleDel(val.id) }}>删除</Button>
+                                    <Button loading={this.state.btnLoading} type="link" onClick={() => { this.handelEit(val.id) }}>编辑</Button>
+                                    <Button loading={this.state.btnLoading} type="link" onClick={() => { this.handleSub(val.id) }}>提交</Button>
+                                </div>
+                            )
+                        }
+                    }
                 },
             ],
             state: "5",
@@ -72,17 +84,20 @@ class Programmanage extends Component {
                 showQuickJumper: true,
                 showTotal: total => `共 ${total} 条`
             },
-            name: "",
-            planTypeId: null,
-            planSmallTypeId: null,
-            foodTypeId: null,
-            code: ""
+            formInfo: {
+                name: "",
+                planTypeId: [],
+                // planSmallTypeId: null,
+                foodTypeId: "",
+                code: ""
+            }
         }
     }
     componentDidMount() {
         this.getPlanTypeData();
         this.getData(this.state.state);
     }
+    //=====================================tab切换====================================//
     onChange = (value) => {
         this.setState({
             state: value,
@@ -94,6 +109,7 @@ class Programmanage extends Component {
         })
         this.getData(value);
     }
+    //=====================================请求计划类型====================================//
     getPlanTypeData = () => {
         axios.get("/planTasks/planTypes").then(res => {
             const data = JSON.parse(JSON.stringify(res.data));
@@ -111,17 +127,17 @@ class Programmanage extends Component {
             })
         })
     }
-    //=====================================表格数据====================================//
+    //=====================================请求表格数据====================================//
     getData = (value, pagination={}) => {
         const params = {};
         params.pageSize = pagination.pageSize ? pagination.pageSize :this.state.pagination.pageSize;
         params.pageNum = pagination.current ? pagination.current : this.state.pagination.current;
         params.state = value ? value : this.state.state;
-        params.code = this.state.code ? this.state.code : null;
-        params.name = this.state.name ? this.state.name : null;
-        params.foodTypeId = this.state.foodTypeId;
-        params.planTypeId = this.state.planTypeId;
-        params.planSmallTypeId = this.state.planSmallTypeId;
+        params.code = this.state.formInfo.code ? this.state.formInfo.code : null;
+        params.name = this.state.formInfo.name ? this.state.formInfo.name : null;
+        params.foodTypeId = this.state.formInfo.foodTypeId ? this.state.formInfo.foodTypeId : null;
+        params.planTypeId = this.state.formInfo.planTypeId.length > 1 ? this.state.formInfo.planTypeId[0] : null;
+        params.planSmallTypeId = this.state.formInfo.planTypeId.length > 1 ? this.state.formInfo.planTypeId[1] : null;
         this.setState({
             loading: true
         })
@@ -152,58 +168,98 @@ class Programmanage extends Component {
         })
         this.getData(this.state.state,pagination)
     }
-    handleNameChange = (e) => {
-        this.setState({
-            name: e.target.value
-        })
-    }
-    handleCascaderChange = (value) => {
-        if (value.length) {
-            this.setState({
-                planTypeId: value[0],
-                planSmallTypeId: value[1]
-            })
-        } else {
-            this.setState({
-                planTypeId: null,
-                planSmallTypeId: null
-            })
-        }
-    }
-    handleFoodChange = (value) => {
-        this.setState({
-            foodTypeId: value
-        })
-    }
-    handleCodeChange = (e) => {
-        this.setState({
-            code: e.target.value
-        })
-    }
+    //=====================================新增计划====================================//
     addProgram = () => {
         this.props.history.push("/app/addProgram")
     }
+    //=====================================form表单取值====================================//
+    onValuesChange = (val, vals) => {
+        this.setState({
+            formInfo: vals
+        })
+    }
+    //=====================================编辑====================================//
+    handelEit = (val) => {
+        this.props.history.push({
+            pathname: "/app/editProgram",
+            state: {
+                id: val
+            }
+        });
+    }
+    //=====================================删除计划====================================//
+    handleDel = (val) => {
+        const modal =Modal.warning({
+            title: "是否删除所选数据",
+            content: "删除后此数据无法找回",
+            okText: "确定",
+            maskClosable: true,
+            onOk: () => {
+                this.setState({
+                    btnLoading: true
+                })
+                axios.delete(`/plans/${val}`).then(res => {
+                    modal.destroy();
+                    this.getData();
+                }).finally(() => {
+                    this.setState({
+                        btnLoading: false
+                    })
+                })
+
+            },
+        })
+    }
+    handleSub = (val) => {
+        const modal =Modal.warning({
+            title: "是否提交所选数据",
+            content: "提交后数据状态会发生改变",
+            okText: "确定",
+            maskClosable: true,
+            onOk: () => {
+                this.setState({
+                    btnLoading: true
+                })
+                axios.put(`/plans/commitPlan/${val}`).then(res => {
+                    modal.destroy();
+                    this.setState({
+                        state: "1"
+                    })
+                    this.getData("1");
+                }).finally(() => {
+                    this.setState({
+                        btnLoading: false
+                    })
+                })
+
+            },
+            onCancel: () => {
+                modal.destroy();
+            }
+        })
+    }
     render() {
         const { state, pagination } = this.state
+        const { foodTypesData } = this.props.baseData;
         return (
             <Card title="计划指定">
-                <Form layout="inline" >
+                <Form layout="inline" initialValues={{ planTypeId: [], name: "", code: "" }} onValuesChange={this.onValuesChange}>
                     <Form.Item
                         label="计划名称"
-                        name="username">
-                        <Input onChange={this.handleNameChange} allowClear placeholder="请输入计划名称" />
+                        name="name">
+                        <Input allowClear placeholder="请输入计划名称" />
                     </Form.Item>
                     <Form.Item
                         label="计划类型"
-                        name="username">
-                        <Cascader onChange={this.handleCascaderChange} options={this.state.planTypeData} placeholder="请选择计划类型" />
+                        name="planTypeId">
+                        <Cascader allowClear options={this.state.planTypeData} placeholder="请选择计划类型" />
                     </Form.Item>
                     <Form.Item
                         label="食品类型"
-                        name="username">
-                        <Select placeholder="请选择食品类型" onChange={this.handleFoodChange} style={{ width:200 }}>
+                        name="foodTypeId">
+                        <Select allowClear placeholder="请选择食品类型" style={{ width:200 }}>
                             {
-                                this.state.foodTypeData.map(item => {
+                                foodTypesData.map(item => {
                                 return <Option key={item.id} value={item.id}>{item.name}</Option>
                                 })
                             }
@@ -211,8 +267,8 @@ class Programmanage extends Component {
                     </Form.Item>
                     <Form.Item
                         label="方案编号"
-                        name="username">
-                        <Input onChange={this.handleCodeChange} allowClear placeholder="请输入方案编号" />
+                        name="code">
+                        <Input allowClear placeholder="请输入方案编号" />
                     </Form.Item>
                     <Form.Item>
                         <Button type="primary" onClick={() => { this.getData(state) }}>搜索</Button>
@@ -230,4 +286,6 @@ class Programmanage extends Component {
         )
     }
 }
-export default Programmanage
+export default connect(({ userInfo, baseData }) => {
+    return { userInfo, baseData }
+})(Programmanage)

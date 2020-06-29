@@ -1,0 +1,529 @@
+{
+  "id": 0,
+  "icon": null,
+  "url": null,
+  "text": "根节点",
+  "type": null,
+  "priority": null,
+  "children": [
+    {
+      "id": 1,
+      "icon": "../../../static/images/jihuaguanli@2x.png",
+      "url": null,
+      "text": "计划管理",
+      "type": "group",
+      "priority": 1,
+      "children": [
+        {
+          "id": 9,
+          "icon": null,
+          "url": "/app/referralProgram",
+          "text": "计划推荐",
+          "type": "link",
+          "priority": 1,
+          "children": [],
+          "parentId": 1,
+          "hasParent": true,
+          "hasChildren": false
+        },
+        {
+          "id": 10,
+          "icon": null,
+          "url": "/app/programmanage",
+          "text": "计划制定",
+          "type": "link",
+          "priority": 2,
+          "children": [],
+          "parentId": 1,
+          "hasParent": true,
+          "hasChildren": false
+        },
+        {
+          "id": 11,
+          "icon": null,
+          "url": "/app/implementplan",
+          "text": "方案制定",
+          "type": "link",
+          "priority": 3,
+          "children": [],
+          "parentId": 1,
+          "hasParent": true,
+          "hasChildren": false
+        }
+      ],
+      "parentId": 0,
+      "hasParent": false,
+      "hasChildren": true
+    },
+    {
+      "id": 119,
+      "icon": "../../../static/images/jihuaguanli@2x.png",
+      "url": "/app/embodiment-a",
+      "text": "方案管理",
+      "type": "group",
+      "priority": 1,
+      "children": [],
+      "parentId": 0,
+      "hasParent": false,
+      "hasChildren": false
+    },
+    {
+      "id": 333,
+      "icon": "../../../static/images/jihuaguanli@2x.png",
+      "url": "/app/department",
+      "text": "监管工作台",
+      "type": "group",
+      "priority": 1,
+      "children": [],
+      "parentId": 0,
+      "hasParent": false,
+      "hasChildren": false
+    },
+    {
+      "id": 2,
+      "icon": "../../../static/images/chouyangguanli@2x.png",
+      "url": null,
+      "text": "抽样管理",
+      "type": "group",
+      "priority": 2,
+      "children": [
+        {
+          "id": 13,
+          "icon": null,
+          "url": "/app/sampling",
+          "text": "抽样列表",
+          "type": "link",
+          "priority": 1,
+          "children": [],
+          "parentId": 2,
+          "hasParent": true,
+          "hasChildren": false
+        }
+      ],
+      "parentId": 0,
+      "hasParent": false,
+      "hasChildren": true
+    },
+    {
+      "id": 104,
+      "icon": "../../../static/images/tongjiguanli@2x.png",
+      "url": "",
+      "text": "统计文档",
+      "type": "group",
+      "priority": 2,
+      "children": [
+        {
+          "id": 105,
+          "icon": null,
+          "url": "/app/statistics-document",
+          "text": "统计文档汇总",
+          "type": "link",
+          "priority": 1,
+          "children": [],
+          "parentId": 104,
+          "hasParent": true,
+          "hasChildren": false
+        }
+      ],
+      "parentId": 0,
+      "hasParent": false,
+      "hasChildren": true
+    },
+    {
+      "id": 3,
+      "icon": "../../../static/images/jieyangguanli@2x.png",
+      "url": null,
+      "text": "接样管理",
+      "type": "group",
+      "priority": 3,
+      "children": [
+        {
+          "id": 14,
+          "icon": null,
+          "url": "/app/getsample",
+          "text": "接样列表",
+          "type": "link",
+          "priority": 1,
+          "children": [],
+          "parentId": 3,
+          "hasParent": true,
+          "hasChildren": false
+        }
+      ],
+      "parentId": 0,
+      "hasParent": false,
+      "hasChildren": true
+    },
+    {
+      "id": 4,
+      "icon": "../../../static/images/jianyanguanli@2x.png",
+      "url": null,
+      "text": "检验管理",
+      "type": "group",
+      "priority": 4,
+      "children": [
+        {
+          "id": 15,
+          "icon": null,
+          "url": "/app/inspectionlink_manage",
+          "text": "检验列表",
+          "type": "link",
+          "priority": 1,
+          "children": [],
+          "parentId": 4,
+          "hasParent": true,
+          "hasChildren": false
+        },
+        {
+          "id": 98,
+          "icon": null,
+          "url": "/app/index_complete_data",
+          "text": "检验完成数据",
+          "type": "link",
+          "priority": 1,
+          "children": [],
+          "parentId": 4,
+          "hasParent": true,
+          "hasChildren": false
+        },
+        {
+          "id": 16,
+          "icon": null,
+          "url": "/app/inspectionlink_manage",
+          "text": "复检列表",
+          "type": "link",
+          "priority": 2,
+          "children": [],
+          "parentId": 4,
+          "hasParent": true,
+          "hasChildren": false
+        },
+        {
+          "id": 17,
+          "icon": null,
+          "url": "/app/signature-configuration",
+          "text": "签章配置",
+          "type": "link",
+          "priority": 3,
+          "children": [],
+          "parentId": 4,
+          "hasParent": true,
+          "hasChildren": false
+        }
+      ],
+      "parentId": 0,
+      "hasParent": false,
+      "hasChildren": true
+    },
+    {
+      "id": 78,
+      "icon": "../../../static/images/jieyangguanli@2x.png",
+      "url": null,
+      "text": "备样管理",
+      "type": "group",
+      "priority": 5,
+      "children": [
+        {
+          "id": 79,
+          "icon": null,
+          "url": "/app/management",
+          "text": "管理列表",
+          "type": "link",
+          "priority": 1,
+          "children": [],
+          "parentId": 78,
+          "hasParent": true,
+          "hasChildren": false
+        },
+        {
+          "id": 80,
+          "icon": null,
+          "url": "/app/disposalRecord",
+          "text": "处置记录",
+          "type": "link",
+          "priority": 1,
+          "children": [],
+          "parentId": 78,
+          "hasParent": true,
+          "hasChildren": false
+        }
+      ],
+      "parentId": 0,
+      "hasParent": false,
+      "hasChildren": true
+    },
+    {
+      "id": 34,
+      "icon": "../../../static/images/gongsi@2x.png",
+      "url": null,
+      "text": "公示",
+      "type": "group",
+      "priority": 8,
+      "children": [
+        {
+          "id": 48,
+          "icon": null,
+          "url": "/app/publicSubmit",
+          "text": "公示提交",
+          "type": "link",
+          "priority": 1,
+          "children": [],
+          "parentId": 34,
+          "hasParent": true,
+          "hasChildren": false
+        },
+        {
+          "id": 49,
+          "icon": null,
+          "url": "/app/publicAudit",
+          "text": "公示审核",
+          "type": "link",
+          "priority": 1,
+          "children": [],
+          "parentId": 34,
+          "hasParent": true,
+          "hasChildren": false
+        },
+        {
+          "id": 50,
+          "icon": null,
+          "url": "/app/publicDownLoad",
+          "text": "公示下载",
+          "type": "link",
+          "priority": 1,
+          "children": [],
+          "parentId": 34,
+          "hasParent": true,
+          "hasChildren": false
+        }
+      ],
+      "parentId": 0,
+      "hasParent": false,
+      "hasChildren": true
+    },
+    {
+      "id": 5,
+      "icon": "../../../static/images/jiesuanmokuai@2x.png",
+      "url": null,
+      "text": "预算结算",
+      "type": "group",
+      "priority": 9,
+      "children": [
+        {
+          "id": 18,
+          "icon": null,
+          "url": "/app/accounting-a",
+          "text": "标准价格管理",
+          "type": "link",
+          "priority": 1,
+          "children": [],
+          "parentId": 5,
+          "hasParent": true,
+          "hasChildren": false
+        }
+      ],
+      "parentId": 0,
+      "hasParent": false,
+      "hasChildren": true
+    },
+    {
+      "id": 72,
+      "icon": "../../../static/images/tongjiguanli@2x.png",
+      "url": "",
+      "text": "统计查询",
+      "type": "group",
+      "priority": 11,
+      "children": [
+        {
+          "id": 73,
+          "icon": null,
+          "url": "/app/countAllGet",
+          "text": "汇总查询",
+          "type": "link",
+          "priority": 1,
+          "children": [],
+          "parentId": 72,
+          "hasParent": true,
+          "hasChildren": false
+        },
+        {
+          "id": 75,
+          "icon": null,
+          "url": "/app/loadingTasks",
+          "text": "任务情况统计",
+          "type": "link",
+          "priority": 1,
+          "children": [],
+          "parentId": 72,
+          "hasParent": true,
+          "hasChildren": false
+        },
+        {
+          "id": 76,
+          "icon": null,
+          "url": "/app/sampleDistribution",
+          "text": "抽样分布",
+          "type": "link",
+          "priority": 1,
+          "children": [],
+          "parentId": 72,
+          "hasParent": true,
+          "hasChildren": false
+        }
+      ],
+      "parentId": 0,
+      "hasParent": false,
+      "hasChildren": true
+    },
+    {
+      "id": 33,
+      "icon": "../../../static/images/baogao@2x.png",
+      "url": "http://report.foodsafechina.com/reportX/Valid",
+      "text": "报告",
+      "type": "group",
+      "priority": 12,
+      "children": [
+        {
+          "id": 35,
+          "icon": null,
+          "url": "http://115.28.69.211/reportGD/Valid?token=d54a0848af5047c2879be29b737393fe&location=深圳",
+          "text": "报告生成",
+          "type": "link",
+          "priority": 1,
+          "children": [],
+          "parentId": 33,
+          "hasParent": true,
+          "hasChildren": false
+        }
+      ],
+      "parentId": 0,
+      "hasParent": false,
+      "hasChildren": true
+    },
+    {
+      "id": 29,
+      "icon": "../../../static/images/jichuku@2x.png",
+      "url": null,
+      "text": "基础库",
+      "type": "group",
+      "priority": 14,
+      "children": [
+        {
+          "id": 64,
+          "icon": null,
+          "url": "/app/inspectedUnitmanage",
+          "text": "受检单位管理",
+          "type": "link",
+          "priority": 1,
+          "children": [],
+          "parentId": 29,
+          "hasParent": true,
+          "hasChildren": false
+        },
+        {
+          "id": 65,
+          "icon": null,
+          "url": "/app/productsmanage",
+          "text": "产品维护",
+          "type": "link",
+          "priority": 1,
+          "children": [],
+          "parentId": 29,
+          "hasParent": true,
+          "hasChildren": false
+        },
+        {
+          "id": 77,
+          "icon": null,
+          "url": "/app/unitMaintenance",
+          "text": "总库单位维护",
+          "type": "link",
+          "priority": 1,
+          "children": [],
+          "parentId": 29,
+          "hasParent": true,
+          "hasChildren": false
+        },
+        {
+          "id": 30,
+          "icon": null,
+          "url": "/app/testprogramsmanage",
+          "text": "检测项目管理",
+          "type": "link",
+          "priority": 9,
+          "children": [],
+          "parentId": 29,
+          "hasParent": true,
+          "hasChildren": false
+        },
+        {
+          "id": 45,
+          "icon": null,
+          "url": "/app/judgestandards",
+          "text": "判定标准管理",
+          "type": "link",
+          "priority": 9,
+          "children": [],
+          "parentId": 29,
+          "hasParent": true,
+          "hasChildren": false
+        },
+        {
+          "id": 46,
+          "icon": null,
+          "url": "/app/detectionstandards",
+          "text": "检测依据管理",
+          "type": "link",
+          "priority": 9,
+          "children": [],
+          "parentId": 29,
+          "hasParent": true,
+          "hasChildren": false
+        },
+        {
+          "id": 47,
+          "icon": null,
+          "url": "/app/totalwarehouses",
+          "text": "总库管理",
+          "type": "link",
+          "priority": 9,
+          "children": [],
+          "parentId": 29,
+          "hasParent": true,
+          "hasChildren": false
+        }
+      ],
+      "parentId": 0,
+      "hasParent": false,
+      "hasChildren": true
+    },
+    {
+      "id": 8,
+      "icon": "../../../static/images/chouyangguanli@2x.png",
+      "url": null,
+      "text": "系统设置",
+      "type": "group",
+      "priority": 15,
+      "children": [
+        {
+          "id": 22,
+          "icon": null,
+          "url": "/app/usermanage",
+          "text": "用户管理",
+          "type": "link",
+          "priority": 1,
+          "children": [],
+          "parentId": 8,
+          "hasParent": true,
+          "hasChildren": false
+        }
+      ],
+      "parentId": 0,
+      "hasParent": false,
+      "hasChildren": true
+    }
+  ],
+  "parentId": null,
+  "hasParent": false,
+  "hasChildren": true
+}

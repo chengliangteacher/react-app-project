@@ -1,0 +1,26 @@
+.menu-tab {
+    background-color: #eeeeee;
+    position: relative;
+    .left-icon {
+        position: absolute;
+        left: 0;
+        top: 7px;
+        cursor: pointer;
+        background-color: #eeeeee;
+    }
+    .right-icon {
+        background-color: #eeeeee;
+        position: absolute;
+        right: 0;
+        top: 7px;
+        cursor: pointer;
+    }
+    .nav-tabs {
+        padding: 7px 20px 7px 15px;
+        overflow-x: auto;
+        display: flex;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+}

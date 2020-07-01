@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-    BrowserRouter,
     Route,
     Switch
 } from 'react-router-dom'
@@ -11,21 +10,17 @@ class AppRoute extends React.Component {
     render() {
         if (sessionStorage.token) {
             return (
-                <BrowserRouter>
                     <Switch>
                         <Route history={this.props.history} path="/login" component={Login}></Route>
                         <Layout history={this.props.history} />
                     </Switch>
-                </BrowserRouter>
             )
         } else {
             this.props.history.push("/login");
             return (
-                <BrowserRouter>
                     <Switch>
                         <Route history={this.props.history} path="/login" component={Login}></Route>
                     </Switch>
-                </BrowserRouter>
             );
         }
     }

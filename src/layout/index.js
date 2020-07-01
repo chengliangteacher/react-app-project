@@ -3,7 +3,7 @@ import { Route, Redirect, Switch } from "react-router-dom";
 import MenuApp from "./menu"
 import routes from "../router"
 import { Button } from "antd"
-import BreadCrumb from "./BreadCrumb"
+import MenuTab from "./menu-tab/menu-tab"
 import "./menu/index.scss"
 import AddProgram from "../page/Programmanage/com/addProgram"
 import EditProgram from "../page/Programmanage/com/editProgram"
@@ -46,11 +46,57 @@ class Layoutview extends React.Component {
             width: this.state.collapsed ? 200 : 80,
         });
     };
+    componentWillMount() {
+        let name = "";
+        routes.forEach(item => {
+            if (item.url === this.props.history.location.pathname) {
+                name = item.text;
+            }
+        })
+        if (!name) {
+            if (this.props.history.location.pathname === "/app/addProgram") {
+                name = "新增计划"
+            }
+            if (this.props.history.location.pathname === "/app/editProgram") {
+                name = "编辑计划"
+            }
+        }
+        this.props.dispatch({ type: "ADDMENU", data: {...this.props.history.location, name} })
+        this.props.dispatch({ type: "SETCURRENTROUTE", data: {...this.props.history.location, name} })
+    }
     componentDidMount() {
         this.getAreaData();
         this.getFoodData();
         this.getFoodTypesData();
     }
+    componentWillUpdate(nextProps, Props) {
+        console.log(nextProps)
+        //=====================================设置redux====================================//
+        let name = "";
+        routes.forEach(item => {
+            if (item.url === nextProps.location.pathname) {
+                name = item.text;
+            }
+        })
+        if (!name) {
+            if (nextProps.location.pathname === "/app/addProgram") {
+                name = "新增计划"
+            }
+            if (nextProps.location.pathname === "/app/editProgram") {
+                name = "编辑计划"
+            }
+        }
+        this.props.dispatch({ type: "ADDMENU", data: {...nextProps.location, name,} })
+        this.props.dispatch({ type: "SETCURRENTROUTE", data: nextProps.location })
+    }
+
+    handleDeleteTab = (val) => {
+        this.props.dispatch({ type: "DELETEMENU", data: val })
+        if (val.pathname === this.props.manyTabs.currentRoute.pathname) {
+            this.props.history.push(this.props.manyTabs.menutabs[this.props.manyTabs.menutabs.length-2])
+        }
+    }
+
     render() {
         return (
             <div>
@@ -64,19 +110,19 @@ class Layoutview extends React.Component {
                 </div>
                 <div className="d-flex">
                     <MenuApp history={this.props.history} width={this.state.width} collapsed={this.state.collapsed} />
-                    <div style={{ flexGrow: 1 }}>
-                        <BreadCrumb history={this.props.history} />
+                    <div style={{ width: `calc(100vw - ${this.state.width + 'px'})` }}>
+                        <MenuTab width={this.state.width} manyTabs={this.props.manyTabs.menutabs} handleDeleteTab={(val) => this.handleDeleteTab(val)} currentMenu={this.props.manyTabs.currentRoute} history={this.props.history} />
                         <div className="ml-1 content">
                             <Switch>
                                 {routes.map(item => {
                                     return (
-                                        <Route history={this.props.history} key={item.id} path={item.url} component={item.component}>
+                                        <Route history={{...this.props.history, name: item.text}} key={item.id} path={item.url} component={item.component}>
                                         </Route>
                                     )
                                 })}
-                                <Route history={this.props.history} path="/app/addProgram" component={AddProgram}>
+                                <Route history={{...this.props.history, text: "添加计划"}} path="/app/addProgram" component={AddProgram}>
                                 </Route>
-                                <Route history={this.props.history} path="/app/editProgram" component={EditProgram}>
+                                <Route history={{...this.props.history, text: "编辑计划"}} path="/app/editProgram" component={EditProgram}>
                                 </Route>
                                 <Redirect exact from="/" to="/login" />
                                 <Redirect to='/404' />
@@ -89,6 +135,6 @@ class Layoutview extends React.Component {
     }
 }
 
-export default connect(({ userInfo, baseData }) => {
-    return { userInfo, baseData }
+export default connect(({ userInfo, baseData, manyTabs }) => {
+    return { userInfo, baseData, manyTabs }
 })(Layoutview)

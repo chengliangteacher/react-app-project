@@ -44,12 +44,10 @@ class LoadingTasks extends Component {
             url: "https://vi.xrdata.net/draw/survey/sampling/distribution/unit/batch?year=2020&pageSize=7&currentPage=1&planAttr=",
             method: "get",
             headers: {
-                authorization: "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTUzODg0ODcsInN1YiI6InN6X3Zpc3VhbCIsImNyZWF0ZWQiOjE1OTI3OTY0ODcwNzh9.yluUbZVCv7JpBM8L5lx_oZiEM4Mu-oaYXMS8U_6BOjM"
+                authorization: "eyJhbGciOiJIUzI1NiJ9.eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTU5ODk2MDUsInN1YiI6InN6X3Zpc3VhbCIsImNyZWF0ZWQiOjE1OTMzOTc2MDUwMzl9.7rsNSjRb048Nbov0d-bL4j9Ckdd3MSWOo55GB_Kcjug-bL4j9Ckdd3MSWOo55GB_Kcjug"
             }
         }).then(res => {
-            console.log(res);
-            const data = res.data.data.rows;
-
+            const data = res.data.code !==200 ? [] : res.data.data.rows
             this.setState({
                 sampleData: data,
                 sampleOptions: {
@@ -82,8 +80,9 @@ class LoadingTasks extends Component {
                     yAxis: {
                         type: "category",
                         axisLabel: {
+                            show: true,
                             color: "white"
-                        }
+                        },
                     },
                     grid: {
                         left: 100,
@@ -126,12 +125,11 @@ class LoadingTasks extends Component {
             url: "https://vi.xrdata.net/draw/survey/sampling/distribution/unit/sampled?year=2020&pageSize=7&currentPage=1&planAttr=",
             method: "get",
             headers: {
-                authorization: "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTUzODg0ODcsInN1YiI6InN6X3Zpc3VhbCIsImNyZWF0ZWQiOjE1OTI3OTY0ODcwNzh9.yluUbZVCv7JpBM8L5lx_oZiEM4Mu-oaYXMS8U_6BOjM"
+                authorization: "eyJhbGciOiJIUzI1NiJ9.eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTU5ODk2MDUsInN1YiI6InN6X3Zpc3VhbCIsImNyZWF0ZWQiOjE1OTMzOTc2MDUwMzl9.7rsNSjRb048Nbov0d-bL4j9Ckdd3MSWOo55GB_Kcjug-bL4j9Ckdd3MSWOo55GB_Kcjug"
             }
         }).then(res => {
             console.log(res);
-            const data = res.data.data.rows;
-
+            const data = res.data.code !==200 ? [] : res.data.data.rows
             this.setState({
                 sampleData: data,
                 sampleHomeOptions: {
@@ -208,17 +206,17 @@ class LoadingTasks extends Component {
             url: "https://vi.xrdata.net/draw/survey/sampling/map/distribution/area?year=2020&planAttr=",
             method: "get",
             headers: {
-                authorization: "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTUzODg0ODcsInN1YiI6InN6X3Zpc3VhbCIsImNyZWF0ZWQiOjE1OTI3OTY0ODcwNzh9.yluUbZVCv7JpBM8L5lx_oZiEM4Mu-oaYXMS8U_6BOjM"
+                authorization: "eyJhbGciOiJIUzI1NiJ9.eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTU5ODk2MDUsInN1YiI6InN6X3Zpc3VhbCIsImNyZWF0ZWQiOjE1OTMzOTc2MDUwMzl9.7rsNSjRb048Nbov0d-bL4j9Ckdd3MSWOo55GB_Kcjug-bL4j9Ckdd3MSWOo55GB_Kcjug"
             }
         }).then(res => {
-            let minarr = JSON.parse(JSON.stringify(res.data.data));
-            let maxarr = JSON.parse(JSON.stringify(res.data.data));
+            let minarr = JSON.parse(JSON.stringify(res.data.code === 200 ? res.data.data : []));
+            let maxarr = JSON.parse(JSON.stringify(res.data.code === 200 ? res.data.data : []));
             this.setState({
                 mapOptions: {
                     visualMap: {
                         type: "piecewise",
-                        min: minarr.sort((a, b) => a.batchCounts - b.batchCounts)[0].batchCounts,
-                        max: maxarr.sort((a, b) => b.batchCounts - a.batchCounts)[0].batchCounts,
+                        min: minarr.length !== 0 ? minarr.sort((a, b) => a.batchCounts - b.batchCounts)[0].batchCounts : 0,
+                        max: maxarr.length !== 0 ? maxarr.sort((a, b) => b.batchCounts - a.batchCounts)[0].batchCounts : 0,
                         text: ['高', '低'],
                         realtime: true,
                         calculable: true,
@@ -269,7 +267,7 @@ class LoadingTasks extends Component {
                                 borderColor: "rgba(255, 200, 0)",
                             }
                         },
-                        data: res.data.data.map(item => {
+                        data: (res.data.data || []).map(item => {
                             return {
                                 name: item.areaName,
                                 value: item.batchCounts,
@@ -289,7 +287,7 @@ class LoadingTasks extends Component {
             url: "https://vi.xrdata.net/draw/survey/sampling/distribution/link?year=2020&areaId=&planAttr=",
             method: "get",
             headers: {
-                authorization: "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTUzODg0ODcsInN1YiI6InN6X3Zpc3VhbCIsImNyZWF0ZWQiOjE1OTI3OTY0ODcwNzh9.yluUbZVCv7JpBM8L5lx_oZiEM4Mu-oaYXMS8U_6BOjM"
+                authorization: "eyJhbGciOiJIUzI1NiJ9.eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTU5ODk2MDUsInN1YiI6InN6X3Zpc3VhbCIsImNyZWF0ZWQiOjE1OTMzOTc2MDUwMzl9.7rsNSjRb048Nbov0d-bL4j9Ckdd3MSWOo55GB_Kcjug-bL4j9Ckdd3MSWOo55GB_Kcjug"
             }
         }).then(res => {
             this.setState({
@@ -300,7 +298,7 @@ class LoadingTasks extends Component {
                     },
                     legend: {
                         show: true,
-                        data: res.data.data.map(item => item.linkName),
+                        data: (res.data.code === 200 ? res.data.data : []).map(item => item.linkName),
                         bottom: 0,
                         textStyle: {
                             color: "white"
@@ -315,7 +313,7 @@ class LoadingTasks extends Component {
                             type: 'pie',
                             radius: ['50%', '70%'],
                             center: ['40%', '50%'],
-                            data: res.data.data.map(item => {
+                            data: (res.data.code === 200 ? res.data.data : []).map(item => {
                                 return {
                                     name: item.linkName,
                                     value: item.batchCounts,
@@ -342,7 +340,7 @@ class LoadingTasks extends Component {
             url: "https://vi.xrdata.net/draw/survey/sampling/distribution/category?year=2020&pageSize=999999&currentPage=1&planAttr=",
             method: "get",
             headers: {
-                authorization: "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTUzODg0ODcsInN1YiI6InN6X3Zpc3VhbCIsImNyZWF0ZWQiOjE1OTI3OTY0ODcwNzh9.yluUbZVCv7JpBM8L5lx_oZiEM4Mu-oaYXMS8U_6BOjM"
+                authorization: "eyJhbGciOiJIUzI1NiJ9.eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTU5ODk2MDUsInN1YiI6InN6X3Zpc3VhbCIsImNyZWF0ZWQiOjE1OTMzOTc2MDUwMzl9.7rsNSjRb048Nbov0d-bL4j9Ckdd3MSWOo55GB_Kcjug-bL4j9Ckdd3MSWOo55GB_Kcjug"
             }
         }).then(res => {
             this.setState({
@@ -372,10 +370,13 @@ class LoadingTasks extends Component {
                             itemStyle: {
                                 color: "#0086b3"
                             },
-                            data: res.data.data.rows.map(item => {
+                            data: (res.data.code === 200 ? res.data.data.rows : []).map(item => {
                                 return {
                                     name: item.categoryName,
                                     value: item.batchCounts,
+                                    itemStyle: {
+                                        color: "#0086b3"
+                                    }
                                 }
                             }),
                         }
@@ -392,14 +393,14 @@ class LoadingTasks extends Component {
             url: "https://vi.xrdata.net/draw/survey/sampling/distribution/year?year=2020&age=2019&areaId=&planAttr=",
             method: "get",
             headers: {
-                authorization: "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTUzODg0ODcsInN1YiI6InN6X3Zpc3VhbCIsImNyZWF0ZWQiOjE1OTI3OTY0ODcwNzh9.yluUbZVCv7JpBM8L5lx_oZiEM4Mu-oaYXMS8U_6BOjM"
+                authorization: "eyJhbGciOiJIUzI1NiJ9.eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTU5ODk2MDUsInN1YiI6InN6X3Zpc3VhbCIsImNyZWF0ZWQiOjE1OTMzOTc2MDUwMzl9.7rsNSjRb048Nbov0d-bL4j9Ckdd3MSWOo55GB_Kcjug-bL4j9Ckdd3MSWOo55GB_Kcjug"
             }
         }).then(res => {
             axios({
                 url: "https://vi.xrdata.net/draw/survey/sampling/distribution/year?year=2020&age=2020&areaId=&planAttr=",
                 method: "get",
                 headers: {
-                    authorization: "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTUzODg0ODcsInN1YiI6InN6X3Zpc3VhbCIsImNyZWF0ZWQiOjE1OTI3OTY0ODcwNzh9.yluUbZVCv7JpBM8L5lx_oZiEM4Mu-oaYXMS8U_6BOjM"
+                    authorization: "eyJhbGciOiJIUzI1NiJ9.eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTU5ODk2MDUsInN1YiI6InN6X3Zpc3VhbCIsImNyZWF0ZWQiOjE1OTMzOTc2MDUwMzl9.7rsNSjRb048Nbov0d-bL4j9Ckdd3MSWOo55GB_Kcjug-bL4j9Ckdd3MSWOo55GB_Kcjug"
                 }
             }).then(res2 => {
                 this.setState({
@@ -429,7 +430,7 @@ class LoadingTasks extends Component {
                             axisLabel: {
                                 color: "white"
                             },
-                            data: res.data.data.map(item => item.samplingMouth+"月")
+                            data: (res.data.code === 200 ? res.data.data : []).map(item => item.samplingMouth+"月")
                         },
                         yAxis: {
                             type: "value",
@@ -452,7 +453,7 @@ class LoadingTasks extends Component {
                                 },
                                 symbol: "circle",
                                 symbolSize: 8,
-                                data: res.data.data.map(item => item.batchCounts),
+                                data: (res.data.code === 200 ? res.data.data : []).map(item => item.batchCounts),
                                 itemStyle: {
                                     color: "#00afff",
                                 },
@@ -468,7 +469,7 @@ class LoadingTasks extends Component {
                                 },
                                 symbol: "circle",
                                 symbolSize: 8,
-                                data: res2.data.data.map(item => item.batchCounts)
+                                data: (res2.data.code === 200 ? res2.data.data : []).map(item => item.batchCounts)
                             },
                         ]
                     }

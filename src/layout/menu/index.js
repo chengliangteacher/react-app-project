@@ -30,7 +30,6 @@ export default class MenuApp extends Component {
         }
     }
     componentDidCatch(error) {
-        console.log(error)
     }
     onOpenChange= (openKeys) => {
         openKeys.forEach(item => {
